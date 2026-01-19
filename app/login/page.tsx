@@ -9,8 +9,23 @@ export default function LoginPage() {
 
       const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
+      const [emailError, setEmailError] = useState(false);
+      const [passwordError, setPasswordError] = useState(false);
+
+      const validate = () => {
+            const errors = {
+                  email: !email || !email.includes("@"),
+                  password: !password
+            };
+
+            setEmailError(errors.email);
+            setPasswordError(errors.password);
+
+            return !errors.email && !errors.password;
+      };
 
       const handleSubmit = () => {
+            if (!validate()) return;
             login({ email, password });
       };
 
@@ -36,6 +51,8 @@ export default function LoginPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         fullWidth
+                        required
+                        error={emailError}
                   />
 
                   <TextField
@@ -45,6 +62,8 @@ export default function LoginPage() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         fullWidth
+                        required
+                        error={passwordError}
                   />
 
                   <Button variant="contained" onClick={handleSubmit} disabled={isPending} fullWidth>
