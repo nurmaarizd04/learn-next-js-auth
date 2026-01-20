@@ -1,0 +1,19 @@
+services:
+  next-js-learn-auth:
+    container_name: next-js-learn-auth
+    image: next-js-learn-auth:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_API_URL_PRODUCTS: ${NEXT_PUBLIC_API_URL_PRODUCTS}
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - test-bridge
+
+networks:
+  test-bridge:
+    driver: bridge
