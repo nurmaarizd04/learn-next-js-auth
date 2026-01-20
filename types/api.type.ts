@@ -12,3 +12,8 @@ export type PaginatedResponse<T> = ApiResponse<T> & {
             total_count: number;
       };
 };
+
+export type CreatedApiResponse = {
+      code: number;
+      message: string;
+};
